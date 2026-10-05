@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yahtzee Roller</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="table">
+    <section class="card">
+
+      <header class="masthead">
+        <h1>Yahtzee Roller</h1>
+        <p class="instructions">
+          Yahtzee is played with five six-sided dice. Roll all five, set aside any you want
+          to keep, and roll again to chase a scoring combination &mdash; three of a kind, a
+          straight, a full house, and so on. This roller handles the dice for you: press
+          <strong>Roll dice</strong> (or hit Enter) to throw all five at once.
+          Every die value is fetched from a remote REST API. The tray and
+          the readout below always show your latest roll.
+        </p>
+      </header>
+
+      <p class="status" id="serverStatus" data-state="idle" role="status">
+        <span class="status-dot"></span>
+        <span id="serverStatusText">Server: not contacted yet</span>
+      </p>
+
+      <div class="tray" id="tray" aria-live="polite">
+        <div class="die" id="die-0"></div>
+        <div class="die" id="die-1"></div>
+        <div class="die" id="die-2"></div>
+        <div class="die" id="die-3"></div>
+        <div class="die" id="die-4"></div>
+      </div>
+
+      <button type="button" id="rollButton" class="roll-button" autofocus>
+        Roll dice
+      </button>
+
+      <table class="readout">
+        <caption>Latest roll</caption>
+        <thead>
+          <tr>
+            <th scope="col">Die</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><label for="value-0">Die 1</label></th>
+            <td><input type="text" id="value-0" readonly inputmode="none" aria-label="Die 1 value" /></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="value-1">Die 2</label></th>
+            <td><input type="text" id="value-1" readonly inputmode="none" aria-label="Die 2 value" /></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="value-2">Die 3</label></th>
+            <td><input type="text" id="value-2" readonly inputmode="none" aria-label="Die 3 value" /></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="value-3">Die 4</label></th>
+            <td><input type="text" id="value-3" readonly inputmode="none" aria-label="Die 4 value" /></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="value-4">Die 5</label></th>
+            <td><input type="text" id="value-4" readonly inputmode="none" aria-label="Die 5 value" /></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row"><label for="total">Total</label></th>
+            <td><input type="text" id="total" readonly inputmode="none" aria-label="Total of all dice" /></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="cors-demo">
+        <h2>CORS failure demo</h2>
+        <p>
+          This button asks a server in another domain for data. That server does not send an
+          <code>Access-Control-Allow-Origin</code> header, so the browser blocks the response.
+        </p>
+        <button type="button" id="corsButton" class="cors-button">Trigger CORS failure</button>
+        <div class="cors-result" id="corsResult" aria-live="polite"></div>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
